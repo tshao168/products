@@ -12,6 +12,6 @@ while True :
 	# 1 行寫法
 	products.append ([name, price])
 
-print (products)
-#print (products [0][0])
-#print (products [1][1])
+# print (products)
+for p in products :
+	print (p[0], '的價格是', p[1])
