@@ -1,26 +1,24 @@
-#讀取檔案
+import os # operating system
 products = []
-with open ('products.CSV', 'r') as f:
-	for line in f:
-		if '商品,價格' in line :
-			continue # 跳過這一次的迴1圈,進行下一迴
-		name, price = line.strip().split(',') # 先把換行\n符號處理掉再分割
-		products.append ([name, price])
-print (products)
+if  os.path.isfile ('products.csv') : #檢查檔案在不在
+	print ('檔案存在')
+	with open ('products.CSV', 'r') as f:
+		for line in f:
+			if '商品,價格' in line :
+				continue # 跳過這一次的迴1圈,進行下一迴
+			name, price = line.strip().split(',') # 先把換行\n符號處理掉再分割
+			products.append ([name, price])
+	print (products)
 
-# 使用者輸入
+else :
+	print ('檔案不在')
+#使用者輸入
 while True :
 	name = input ('請輸入商品名稱: ')
 	if name == 'q' :
 		break
 	price = input ('請輸入商品價格: ') 
 	price = int (price)
-	# p = []
-	#p.append (name)
-	#p.append (price)
-	# 簡寫法
-	#p = [name, price]
-	# 1 行寫法
 	products.append ([name, price])
 
 # print (products)
