@@ -3,19 +3,14 @@ import os # operating system
 #讀取檔案
 def read_file (filename) :
 	products = []
-	if  os.path.isfile (filename) : #檢查檔案在不在
-		print ('檔案存在')
-		with open (filename, 'r') as f:
+	with open (filename, 'r') as f:
 			for line in f:
 				if '商品,價格' in line :
 					continue # 跳過這一次的迴1圈,進行下一迴
 				name, price = line.strip().split(',') # 先把換行\n符號處理掉再分割
 				products.append ([name, price])
-		print (products)
-
-	else :
-		print ('檔案不在')
 	return products
+
 
 #使用者輸入
 
@@ -41,7 +36,15 @@ def write_file(filename,products):
 		for p in products :
 			f.write (p[0] + ',' + str(p[1]) + '\n') # 利用+號來聯結字串
 
-products = read_file('products.csv')
-products = user_input(products)
-print_products(products)
-write_file('products.csv',products)
+def main ():
+	filename = 'products.csv'
+	if  os.path.isfile (filename) : #檢查檔案在不在
+		print ('檔案存在')
+		products = read_file(filename)
+	else :
+		print ('找不到檔案不在')
+	products = user_input(products)
+	print_products(products)
+	write_file('products.csv',products)
+
+main ()
